@@ -1,5 +1,6 @@
 package it.prova.gestioneassicurati.controller.api;
 
+import java.io.File;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -60,4 +61,20 @@ public class AssicuratoRestController {
 		Assicurato assicurato = assicuratoService.get(id);
 		assicuratoService.delete(assicurato);
 	}
+	
+	@GetMapping("/processing")
+	@ResponseStatus(HttpStatus.OK)
+	public void processing() {
+		 File file = new File("src/main/java/it/prova/gestioneassicurati/file/assicurati.xml");
+		List<Assicurato> assicuratiDaControllare = assicuratoService.xmlToObject();
+		for (Assicurato assicuratoItem : assicuratiDaControllare) {
+			if (assicuratoItem.getNumeroSinistri() < 0) {
+				file.renameTo(new File("src/main/java/it/prova/gestioneassicurati/file/scarto/assicurati.xml"));
+				break;
+			}				
+		}
+		assicuratoService.createOrUpdateDB(assicuratiDaControllare);
+		file.renameTo(new File("src/main/java/it/prova/gestioneassicurati/file/processed/assicurati.xml"));
+	}
+	
 }

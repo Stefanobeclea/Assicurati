@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
@@ -82,4 +83,20 @@ public class AssicuratoServiceImpl implements AssicuratoService{
 		}
 		return assicuratiDaPassare;
 	}
+	
+	@Transactional
+	public void createOrUpdateDB(List<Assicurato> assicuratiInput){
+		for (Assicurato assicuratoItem : assicuratiInput) {
+			 Assicurato assicuratoDalDB = repository.findByCodiceFiscale(assicuratoItem.getCodiceFiscale());
+			if(assicuratoDalDB != null) {
+				assicuratoDalDB.setNumeroSinistri(assicuratoDalDB.getNumeroSinistri()+assicuratoItem.getNumeroSinistri());
+				repository.save(assicuratoDalDB);
+			}
+			else {
+				repository.save(assicuratoItem);
+			}
+		}
+	}
+	
+	
 }
