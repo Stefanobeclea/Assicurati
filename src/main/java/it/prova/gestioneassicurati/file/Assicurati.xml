@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding='utf-8'?>
+	<assicurati>
+		<assicurato>
+			<nome>Silvano</nome>
+			<cognome>Paolini</cognome>
+			<dataNascita>1978-12-03</dataNascita>
+			<codiceFiscale>SICODICE</codiceFiscale>
+			<numeroSinistri>5</numeroSinistri>
+		</assicurato>
+		<assicurato>
+			<nome>Vincenzo</nome>
+			<cognome>Pepitone</cognome>
+			<dataNascita>1980-12-03</dataNascita>
+			<codiceFiscale>VICODICE</codiceFiscale>
+			<numeroSinistri>2</numeroSinistri>
+		</assicurato>
+	</assicurati>

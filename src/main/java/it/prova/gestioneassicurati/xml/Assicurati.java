@@ -1,7 +1,7 @@
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
+// Questo file ï¿½ stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.8-b130911.1802 
 // Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+// Qualsiasi modifica a questo file andrï¿½ persa durante la ricompilazione dello schema di origine. 
 // Generato il: 2021.11.25 alle 02:11:51 PM CET 
 //
 
@@ -10,6 +10,7 @@ package it.prova.gestioneassicurati.xml;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -132,14 +133,14 @@ public class Assicurati {
         protected String cognome;
         @XmlElement(required = true)
         @XmlSchemaType(name = "date")
-        protected XMLGregorianCalendar dataNascita;
+        protected Date dataNascita;
         @XmlElement(required = true)
         protected String codiceFiscale;
         @XmlElement(required = true)
-        protected BigInteger numeroSinistri;
+        protected Integer numeroSinistri;
 
         /**
-         * Recupera il valore della proprietà nome.
+         * Recupera il valore della proprietï¿½ nome.
          * 
          * @return
          *     possible object is
@@ -151,7 +152,7 @@ public class Assicurati {
         }
 
         /**
-         * Imposta il valore della proprietà nome.
+         * Imposta il valore della proprietï¿½ nome.
          * 
          * @param value
          *     allowed object is
@@ -163,7 +164,7 @@ public class Assicurati {
         }
 
         /**
-         * Recupera il valore della proprietà cognome.
+         * Recupera il valore della proprietï¿½ cognome.
          * 
          * @return
          *     possible object is
@@ -175,7 +176,7 @@ public class Assicurati {
         }
 
         /**
-         * Imposta il valore della proprietà cognome.
+         * Imposta il valore della proprietï¿½ cognome.
          * 
          * @param value
          *     allowed object is
@@ -187,31 +188,31 @@ public class Assicurati {
         }
 
         /**
-         * Recupera il valore della proprietà dataNascita.
+         * Recupera il valore della proprietï¿½ dataNascita.
          * 
          * @return
          *     possible object is
          *     {@link XMLGregorianCalendar }
          *     
          */
-        public XMLGregorianCalendar getDataNascita() {
+        public Date getDataNascita() {
             return dataNascita;
         }
 
         /**
-         * Imposta il valore della proprietà dataNascita.
+         * Imposta il valore della proprietï¿½ dataNascita.
          * 
          * @param value
          *     allowed object is
          *     {@link XMLGregorianCalendar }
          *     
          */
-        public void setDataNascita(XMLGregorianCalendar value) {
+        public void setDataNascita(Date value) {
             this.dataNascita = value;
         }
 
         /**
-         * Recupera il valore della proprietà codiceFiscale.
+         * Recupera il valore della proprietï¿½ codiceFiscale.
          * 
          * @return
          *     possible object is
@@ -223,7 +224,7 @@ public class Assicurati {
         }
 
         /**
-         * Imposta il valore della proprietà codiceFiscale.
+         * Imposta il valore della proprietï¿½ codiceFiscale.
          * 
          * @param value
          *     allowed object is
@@ -235,26 +236,26 @@ public class Assicurati {
         }
 
         /**
-         * Recupera il valore della proprietà numeroSinistri.
+         * Recupera il valore della proprietï¿½ numeroSinistri.
          * 
          * @return
          *     possible object is
          *     {@link BigInteger }
          *     
          */
-        public BigInteger getNumeroSinistri() {
+        public Integer getNumeroSinistri() {
             return numeroSinistri;
         }
 
         /**
-         * Imposta il valore della proprietà numeroSinistri.
+         * Imposta il valore della proprietï¿½ numeroSinistri.
          * 
          * @param value
          *     allowed object is
          *     {@link BigInteger }
          *     
          */
-        public void setNumeroSinistri(BigInteger value) {
+        public void setNumeroSinistri(Integer value) {
             this.numeroSinistri = value;
         }
 

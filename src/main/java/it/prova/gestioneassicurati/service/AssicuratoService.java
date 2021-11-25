@@ -17,4 +17,6 @@ public interface AssicuratoService {
 	void delete(Assicurato input);
 	
 	public Assicurato findByCodiceFiscale(String codice);
+	
+	public List<Assicurato> xmlToObject();
 }
