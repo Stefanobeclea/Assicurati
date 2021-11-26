@@ -18,7 +18,4 @@ public interface AssicuratoService {
 	
 	public Assicurato findByCodiceFiscale(String codice);
 	
-	public List<Assicurato> xmlToObject();
-	
-	public void createOrUpdateDB(List<Assicurato> assicuratiInput);
 }

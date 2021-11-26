@@ -1,30 +1,33 @@
 package it.prova.gestioneassicurati.controller.api;
 
-import java.io.File;
+import java.io.File; 
 import java.util.List;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.prova.gestioneassicurati.model.Assicurato;
 import it.prova.gestioneassicurati.service.AssicuratoService;
+import it.prova.gestioneassicurati.service.ConvertXmlToAssicuratoService;
+import it.prova.gestioneassicurati.service.ProcessingAssicuratoService;
+import reactor.netty.http.server.HttpServerResponse;
 
 @RestController
 @RequestMapping(value = "/api/assicurato", produces = { MediaType.APPLICATION_JSON_VALUE})
 public class AssicuratoRestController {
 
+	@Autowired
+	ConvertXmlToAssicuratoService convertXmlToAssicuratoService;
+	
+	@Autowired
+	ProcessingAssicuratoService processingAssicuratoService;
+	
 	@Autowired
 	AssicuratoService assicuratoService;
 	
@@ -40,41 +43,21 @@ public class AssicuratoRestController {
 		return assicurato;
 	}
 	
-	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public Assicurato createNew(@Valid @RequestBody Assicurato assicuratoInput) {
-		Assicurato assicuratoInserito = assicuratoService.save(assicuratoInput);
-		return assicuratoInserito;
-	}
-	
-	@PutMapping("/{id}")
-	public Assicurato update(@Valid @RequestBody Assicurato assicuratoInput, @PathVariable(required = true) Long id) {
-
-		assicuratoInput.setId(id);
-		Assicurato assicuratoAggiornato = assicuratoService.update(assicuratoInput);
-		return assicuratoAggiornato;
-	}
-	
-	@DeleteMapping("/{id}")
-	@ResponseStatus(HttpStatus.OK)
-	public void delete(@PathVariable(required = true) Long id) {
-		Assicurato assicurato = assicuratoService.get(id);
-		assicuratoService.delete(assicurato);
-	}
-	
 	@GetMapping("/processing")
-	@ResponseStatus(HttpStatus.OK)
-	public void processing() {
-		 File file = new File("src/main/java/it/prova/gestioneassicurati/file/assicurati.xml");
-		List<Assicurato> assicuratiDaControllare = assicuratoService.xmlToObject();
+	public ResponseEntity<?> processing(HttpStatus stat, HttpServerResponse rest) {
+		 File file = new File("C:\\Corso\file/assicurati.xml");
+		List<Assicurato> assicuratiDaControllare = convertXmlToAssicuratoService.xmlToObject();
 		for (Assicurato assicuratoItem : assicuratiDaControllare) {
 			if (assicuratoItem.getNumeroSinistri() < 0) {
-				file.renameTo(new File("src/main/java/it/prova/gestioneassicurati/file/scarto/assicurati.xml"));
-				break;
-			}				
+				file.renameTo(new File("C:\\Corso\\file/scarto/assicurati.xml"));
+				 return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+			}	
 		}
-		assicuratoService.createOrUpdateDB(assicuratiDaControllare);
-		file.renameTo(new File("src/main/java/it/prova/gestioneassicurati/file/processed/assicurati.xml"));
+		System.out.println("sono passato lo stesso");
+		processingAssicuratoService.createOrUpdateDB(assicuratiDaControllare);
+		file.renameTo(new File("C:\\Corso\\file/processed/assicurati.xml"));
+		
+		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 	
 }

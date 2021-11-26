@@ -27,7 +27,7 @@ public class Assicurato {
 	private String codiceFiscale;
 	@Column(name = "numeroSinistri")
 	private Integer numeroSinistri;
-	
+
 	public Assicurato() {
 		// TODO Auto-generated constructor stub
 	}
@@ -99,5 +99,11 @@ public class Assicurato {
 		this.codiceFiscale = codiceFiscale;
 		this.numeroSinistri = numeroSinistri;
 	}
-		
+
+	@Override
+	public String toString() {
+		return "Assicurato [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", dataNascita=" + dataNascita
+				+ ", codiceFiscale=" + codiceFiscale + ", numeroSinistri=" + numeroSinistri + "]";
+	}
+
 }
